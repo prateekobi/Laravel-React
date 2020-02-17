@@ -54,7 +54,9 @@ class App extends Component {
     // get all tasks from backend
     getTasks() {
         axios.get('/tasks').then(response => {
-            console.log(response);
+            this.setState({
+                tasks: [...response.data.tasks]
+            });
         });
     }
 
