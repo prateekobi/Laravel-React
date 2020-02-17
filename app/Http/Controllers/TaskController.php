@@ -103,6 +103,7 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // Delete
+        Task::findorFail($id)->delete();
     }
 }

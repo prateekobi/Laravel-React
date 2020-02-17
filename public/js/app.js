@@ -69002,6 +69002,7 @@ function (_Component) {
 
     _this.getTasks();
 
+    _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
     return _this;
   } //handle change
 
@@ -69034,26 +69035,49 @@ function (_Component) {
   }, {
     key: "renderTasks",
     value: function renderTasks() {
+      var _this3 = this;
+
       return this.state.tasks.map(function (task) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: task.id,
           className: "media"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "media-body"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, task.name)));
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, task.name, " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "btn btn-sm btn-warning float-right",
+          onClick: function onClick() {
+            return _this3.handleDelete(task.id);
+          }
+        }, "Delete"))));
       });
     } // get all tasks from backend
 
   }, {
     key: "getTasks",
     value: function getTasks() {
-      var _this3 = this;
+      var _this4 = this;
 
       axios.get('/tasks').then(function (response) {
-        _this3.setState({
+        _this4.setState({
           tasks: _toConsumableArray(response.data.tasks)
         });
       });
+    } // handle delete
+
+  }, {
+    key: "handleDelete",
+    value: function handleDelete(id) {
+      // create const to temove from local state
+      var isNotId = function isNotId(task) {
+        return task.id !== id;
+      };
+
+      var updatedTasks = this.state.tasks.filter(isNotId);
+      this.setState({
+        tasks: updatedTasks
+      }); // make deleted request to the backend
+
+      axios["delete"]("/tasks/".concat(id));
     }
   }, {
     key: "render",

@@ -13,6 +13,7 @@ class App extends Component {
         this.renderTasks = this.renderTasks.bind(this);
         this.getTasks = this.getTasks.bind(this);
         this.getTasks();
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
 
@@ -44,7 +45,7 @@ class App extends Component {
             <div key={task.id} className="media">
                 <div className="media-body">
                     <div>
-                        {task.name}
+                        {task.name} <button className="btn btn-sm btn-warning float-right" onClick={() => this.handleDelete(task.id)}>Delete</button>
                     </div>
                 </div>
             </div>
@@ -58,6 +59,17 @@ class App extends Component {
                 tasks: [...response.data.tasks]
             });
         });
+    }
+
+    // handle delete
+    handleDelete(id) {
+        // create const to temove from local state
+        const isNotId = task => task.id !== id;
+        const updatedTasks = this.state.tasks.filter(isNotId);
+        this.setState({ tasks: updatedTasks });
+
+        // make deleted request to the backend
+        axios.delete(`/tasks/${id}`);
     }
 
     render() {
