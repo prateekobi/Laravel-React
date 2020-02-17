@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class App extends Component {
     constructor(props) {
@@ -45,7 +46,17 @@ class App extends Component {
             <div key={task.id} className="media">
                 <div className="media-body">
                     <div>
-                        {task.name} <button className="btn btn-sm btn-warning float-right" onClick={() => this.handleDelete(task.id)}>Delete</button>
+                        {task.name}
+                        <Link
+                            className="btn btn-sm btn-success float-right"
+                            to={`/${task.id}/edit`}>
+                            Update
+                            </Link>
+                        <button
+                            className="btn btn-sm btn-warning float-right"
+                            onClick={() => this.handleDelete(task.id)}>
+                            Delete
+                            </button>
                     </div>
                 </div>
             </div>

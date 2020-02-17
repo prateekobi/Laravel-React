@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import About from './components/About';
 import Topic from './components/Topic';
+import TaskEdit from './components/TaskEdit'
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
 const Home = () => (
@@ -27,8 +28,8 @@ if (document.getElementById('root')) {
             </ul> */}
             <div>
                 <Switch>
+                    <Route exact path="/:id/edit" component={TaskEdit} />
                     <App />
-                    <Route exact path="/" component={App} />
                     {/* <Route exact path="/about" component={About} />
                     <Route exact path="/topics" component={Topic} /> */}
                 </Switch>
