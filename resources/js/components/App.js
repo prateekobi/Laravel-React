@@ -11,17 +11,13 @@ class App extends Component {
         // bind
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.renderTasks = this.renderTasks.bind(this);
-        this.getTasks = this.getTasks.bind(this);
         this.getTasks();
-        this.handleDelete = this.handleDelete.bind(this);
     }
 
 
 
     //handle change
     handleChange(e) {
-        // console.log(e.target.value);
         this.setState({
             name: e.target.value
         });
@@ -89,7 +85,7 @@ class App extends Component {
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <div className="card">
-                            <div className="card-header">React Component</div>
+                            <div className="card-header">Create Tasks</div>
 
                             <div className="card-body">
                                 <form onSubmit={this.handleSubmit}>

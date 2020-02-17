@@ -73099,12 +73099,9 @@ function (_Component) {
 
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    _this.renderTasks = _this.renderTasks.bind(_assertThisInitialized(_this));
-    _this.getTasks = _this.getTasks.bind(_assertThisInitialized(_this));
 
     _this.getTasks();
 
-    _this.handleDelete = _this.handleDelete.bind(_assertThisInitialized(_this));
     return _this;
   } //handle change
 
@@ -73112,7 +73109,6 @@ function (_Component) {
   _createClass(App, [{
     key: "handleChange",
     value: function handleChange(e) {
-      // console.log(e.target.value);
       this.setState({
         name: e.target.value
       });
@@ -73197,7 +73193,7 @@ function (_Component) {
         className: "card"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-header"
-      }, "React Component"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Create Tasks"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-body"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: this.handleSubmit
@@ -73246,9 +73242,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -73267,14 +73263,82 @@ function (_Component) {
     _classCallCheck(this, TaskEdit);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TaskEdit).call(this, props));
-    _this.state = {};
+    _this.state = {
+      name: '',
+      task: []
+    }; // bind
+
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+
+    _this.getTasks();
+
     return _this;
-  }
+  } //handle change
+
 
   _createClass(TaskEdit, [{
+    key: "handleChange",
+    value: function handleChange(e) {
+      this.setState({
+        name: e.target.value
+      });
+    }
+  }, {
+    key: "getTasks",
+    value: function getTasks() {
+      var _this2 = this;
+
+      axios.get("/tasks/".concat(this.props.match.params.id, "/edit")).then(function (response) {
+        _this2.setState({
+          task: response.data.task,
+          name: response.data.task.name
+        });
+      });
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      var _this3 = this;
+
+      e.preventDefault();
+      axios.put("/tasks/".concat(this.props.match.params.id), {
+        name: this.state.name
+      }).then(function (response) {
+        _this3.props.history.push('/');
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "task Edit Page");
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row justify-content-center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-8"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-header"
+      }, "Edit Task"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "card-body"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+        onSubmit: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "form-group"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("textarea", {
+        onChange: this.handleChange,
+        value: this.state.name,
+        className: "form-control",
+        rows: "5",
+        maxLength: "255",
+        placegolder: "Create new task",
+        required: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "submit",
+        className: "btn btn-primary"
+      }, "Update Task")))))));
     }
   }]);
 
