@@ -20,11 +20,9 @@ class TaskController extends Controller
     public function index(Request $request, Task $task)
     {
         // get all the tasks based on current user ID
-        $allTasks = $task->whereIn('user_id', $request->user()->with('user'));
-
+        $allTasks = $task->whereIn('user_id', $request->user())->with('user');
         // order tasks by created at and get 20 at a time
         $tasks = $allTasks->orderBy('created_at', 'desc')->take(20)->get();
-
         // return response (JSON)
         return response()->json([
             'tasks' => $tasks,

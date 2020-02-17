@@ -11,6 +11,8 @@ class App extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.renderTasks = this.renderTasks.bind(this);
+        this.getTasks = this.getTasks.bind(this);
+        this.getTasks();
     }
 
 
@@ -47,6 +49,13 @@ class App extends Component {
                 </div>
             </div>
         ));
+    }
+
+    // get all tasks from backend
+    getTasks() {
+        axios.get('/tasks').then(response => {
+            console.log(response);
+        });
     }
 
     render() {

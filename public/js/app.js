@@ -68998,6 +68998,10 @@ function (_Component) {
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.renderTasks = _this.renderTasks.bind(_assertThisInitialized(_this));
+    _this.getTasks = _this.getTasks.bind(_assertThisInitialized(_this));
+
+    _this.getTasks();
+
     return _this;
   } //handle change
 
@@ -69037,6 +69041,14 @@ function (_Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "media-body"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, task.name)));
+      });
+    } // get all tasks from backend
+
+  }, {
+    key: "getTasks",
+    value: function getTasks() {
+      axios.get('/tasks').then(function (response) {
+        console.log(response);
       });
     }
   }, {
