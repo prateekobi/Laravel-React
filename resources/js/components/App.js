@@ -43,6 +43,10 @@ class App extends Component {
                 <div className="media-body">
                     <div>
                         {task.name}
+                        <span className="text-muted">
+                            <br />
+                            by {task.user.name} | {task.updated_at.split(' ').slice(1).join(' ')}
+                        </span>
                         <Link
                             className="btn btn-sm btn-success float-right"
                             to={`/${task.id}/edit`}>
@@ -54,6 +58,7 @@ class App extends Component {
                             Delete
                             </button>
                     </div>
+                    <hr />
                 </div>
             </div>
         ));

@@ -73141,7 +73141,9 @@ function (_Component) {
           className: "media"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "media-body"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, task.name, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, task.name, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "text-muted"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), "by ", task.user.name, " | ", task.updated_at.split(' ').slice(1).join(' ')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           className: "btn btn-sm btn-success float-right",
           to: "/".concat(task.id, "/edit")
         }, "Update"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -73149,7 +73151,7 @@ function (_Component) {
           onClick: function onClick() {
             return _this3.handleDelete(task.id);
           }
-        }, "Delete"))));
+        }, "Delete")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)));
       });
     } // get all tasks from backend
 
